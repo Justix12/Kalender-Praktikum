@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>{{ title }}</title>
+
+    </head>
+    <body>
+
+        <a href="{{ url_for('start') }}">zurück</a>
+
+       <h1>Adventskalender 2022 - T&uuml;r Nr.{{ nr }}</h1>
+
+        <h2>Deine Aufgabe Lautet:</h2>
+
+      
+              <p>{{ aufg[nr - 1] }}</p>  
+
+    </body>
+</html>
