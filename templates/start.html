@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <link rel="stylesheet" href="../static/style.css">
         <title>{{ title }}</title>
+
+        <style>
+
+    {% for x in tuerliste %}
+
+    #tuer{{ x.nr }} {background-color: {{ x.farbe }};}
+
+    {% endfor %}
+
+    .tuer {
+        position: relative;
+        top:  60px;
+        bottom: 78px;
+        left: 60px;
+        right: 10px;
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+
+    
+}
+
+
+        </style>
+
 
     </head>
     <body>
 
         <h1>Wilkommen auf der Startseite {{ username }}!</h1> 
 
-       {% for nr in nr %}
+       {% for tuer in tuerliste %}
 
-       <a href="./tuer/{{ nr }}">{{ nr }}</a>
+        <div class="tuer" id="tuer{{ tuer.nr }}" >
+       <a href="./tuer/{{ tuer.nr }}">{{ tuer.nr }}</a>
+        </div>
 
        {% endfor %}
+
+
 
    
         

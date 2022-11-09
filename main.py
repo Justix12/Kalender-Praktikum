@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import  render_template
-from flask import request
+import random
+
 
 app = Flask(__name__)
 
@@ -10,10 +11,36 @@ app = Flask(__name__)
 def start():
 
         title = "Ordix 2022 Adventskalender"
-        nr  = ["1", "2", "3", "4","5","6","7","8","9","10","11","12",
-                "13","14","15","16","17","17","18","20","21","22","23","24"]
+        tuerliste  = []
 
-        return render_template("start.html", title=title, nr=nr)
+        for i in range(24):
+
+                if i%2:
+                        thisdict= {
+                        "nr": i + 1,
+                        "farbe": "blue"
+
+                        }
+                else:
+                        thisdict= {
+                        "nr": i + 1,
+                        "farbe": "green"
+                        }
+                tuerliste.append(thisdict)
+
+
+
+
+        botr = random.randint(0,800)
+        topr = random.randint(0,800)
+        righr = random.randint(0,800)
+        lefr = random.randint(0,800)
+
+
+        return render_template("start.html", title=title, tuerliste=tuerliste, botr=botr)
+
+
+        
 
 
 @app.route("/tuer/<int:nr>")
@@ -48,9 +75,9 @@ def tuer(nr):
         aufg = [aufg1,aufg2,aufg3,aufg4,aufg5,aufg6,aufg7,aufg8,aufg9,aufg10,aufg11,aufg12,
                 aufg13,aufg14,aufg15,aufg16,aufg17,aufg18,aufg19,aufg20,aufg21,aufg22,aufg23,aufg24]
 
+        
 
         return render_template("tueren.html", nr=nr, aufg=aufg)
-
         
 
 
