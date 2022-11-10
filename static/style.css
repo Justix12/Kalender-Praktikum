@@ -3,3 +3,30 @@
     text-decoration: none;
 
 }
+
+@font-face {
+    font-family: "Candycane";
+    src: url(../static/Candcu__.ttf);
+}
+
+.tuer {
+    font-family: "Candycane";
+    font-size: 65px;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+}
+
+td {
+    border: 3px solid white;
+    width: 100vh;
+    height: 120px;
+}
+a:link{
+    color: red;
+    text-decoration: none
+}
+
+a:visited{
+    color: red
+}

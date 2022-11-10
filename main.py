@@ -12,7 +12,7 @@ def start():
 
         title = "Ordix 2022 Adventskalender"
         tuerliste  = []
-
+        
 
 
         for i in range(24):
@@ -31,6 +31,7 @@ def start():
                         "ypos": random.randint(-10,11),
                         "xpos": random.randint(-4,94)
                         }
+                random.shuffle(tuerliste)
                 tuerliste.append(thisdict)
 
 

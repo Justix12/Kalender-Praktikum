@@ -9,7 +9,11 @@
     {% for tueren in tuerliste %}
 
     #tuer{{ tueren.nr }} {
-        background-color: {{ tueren.farbe }};
+       /* background-color: {{ tueren.farbe }}; */
+        background-image: url("../static/img/door.png");
+        background-size: 100px;
+        background-repeat: no-repeat;
+        background-position-x: center;
         bottom: {{ tueren.ypos }}px;
         left: {{ tueren.xpos }}px;
 
@@ -17,21 +21,7 @@
 
     {% endfor %}
 
-    .tuer {
-        
-        width: 100px;
-        height: 100px;
-        margin: 5px;
-}
-
-    td {
-        border: 3px solid black;
-        width: 100vh;
-        height: 120px;
-    }
-
-
-
+    
 
         </style>
 
