@@ -6,25 +6,31 @@
 
         <style>
 
-    {% for x in tuerliste %}
+    {% for tueren in tuerliste %}
 
-    #tuer{{ x.nr }} {
-        background-color: {{ x.farbe }};
-    
-    
-    
+    #tuer{{ tueren.nr }} {
+        background-color: {{ tueren.farbe }};
+        bottom: {{ tueren.ypos }}px;
+        left: {{ tueren.xpos }}px;
+
     }
 
     {% endfor %}
 
     .tuer {
-        position: relative;
+        
         width: 100px;
         height: 100px;
         margin: 5px;
-
-    
 }
+
+    td {
+        border: 3px solid black;
+        width: 100vh;
+        height: 120px;
+    }
+
+
 
 
         </style>
@@ -33,23 +39,22 @@
     </head>
     <body>
 
-        <h1>Wilkommen auf der Startseite {{ username }}!</h1> 
+        <h1>Wilkommen auf der Startseite!</h1> 
 
 
        <table>
         {% for row in range(4) %}
         <tr>
- 
+
             {% for col in range(6) %}
             <td> 
-
-                <div class="tuer" id="tuer{{ tuerliste[ row * 6 + col].nr }}" >
+                <div class="tuer" id="tuer{{ tuerliste[ row * 6 + col].nr }}" style="position:relative">
+                    <div style="position:absolute">
                     <a href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
-                     </div>
-
+                    </div>
+                </div>
             </td>
             {% endfor %}
-
         </tr>
         {% endfor %}
        </table>

@@ -20,26 +20,23 @@ def start():
                 if i%2:
                         thisdict= {
                         "nr": i + 1,
-                        "farbe": "blue"
-
+                        "farbe": "blue",
+                        "ypos": random.randint(-10,11),
+                        "xpos": random.randint(-4,94)
                         }
                 else:
                         thisdict= {
                         "nr": i + 1,
-                        "farbe": "green"
+                        "farbe": "green",
+                        "ypos": random.randint(-10,11),
+                        "xpos": random.randint(-4,94)
                         }
                 tuerliste.append(thisdict)
 
 
 
 
-        botr = random.randint(0,800)
-        topr = random.randint(0,800)
-        righr = random.randint(0,800)
-        lefr = random.randint(0,800)
-
-
-        return render_template("start.html", title=title, tuerliste=tuerliste, botr=botr)
+        return render_template("start.html", title=title, tuerliste=tuerliste)
 
 
         
