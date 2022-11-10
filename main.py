@@ -13,6 +13,8 @@ def start():
         title = "Ordix 2022 Adventskalender"
         tuerliste  = []
 
+
+
         for i in range(24):
 
                 if i%2:

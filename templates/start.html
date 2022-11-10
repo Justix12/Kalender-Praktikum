@@ -8,16 +8,17 @@
 
     {% for x in tuerliste %}
 
-    #tuer{{ x.nr }} {background-color: {{ x.farbe }};}
+    #tuer{{ x.nr }} {
+        background-color: {{ x.farbe }};
+    
+    
+    
+    }
 
     {% endfor %}
 
     .tuer {
         position: relative;
-        top:  60px;
-        bottom: 78px;
-        left: 60px;
-        right: 10px;
         width: 100px;
         height: 100px;
         margin: 5px;
@@ -34,13 +35,24 @@
 
         <h1>Wilkommen auf der Startseite {{ username }}!</h1> 
 
-       {% for tuer in tuerliste %}
 
-        <div class="tuer" id="tuer{{ tuer.nr }}" >
-       <a href="./tuer/{{ tuer.nr }}">{{ tuer.nr }}</a>
-        </div>
+       <table>
+        {% for row in range(4) %}
+        <tr>
+ 
+            {% for col in range(6) %}
+            <td> 
 
-       {% endfor %}
+                <div class="tuer" id="tuer{{ tuerliste[ row * 6 + col].nr }}" >
+                    <a href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
+                     </div>
+
+            </td>
+            {% endfor %}
+
+        </tr>
+        {% endfor %}
+       </table>
 
 
 
