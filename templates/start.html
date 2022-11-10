@@ -11,9 +11,11 @@
     #tuer{{ tueren.nr }} {
        /* background-color: {{ tueren.farbe }}; */
         background-image: url("../static/img/door.png");
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-size: 100px;
         background-repeat: no-repeat;
-        background-position-x: center;
         bottom: {{ tueren.ypos }}px;
         left: {{ tueren.xpos }}px;
 
@@ -29,7 +31,7 @@
     </head>
     <body>
 
-        <h1>Wilkommen auf der Startseite!</h1> 
+        <h1 id="z3">Ordix Adventskalender 2022</h1> 
 
 
        <table>
@@ -40,7 +42,7 @@
             <td> 
                 <div class="tuer" id="tuer{{ tuerliste[ row * 6 + col].nr }}" style="position:relative">
                     <div style="position:absolute">
-                    <a href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
+                    <a id="z2" href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
                     </div>
                 </div>
             </td>
