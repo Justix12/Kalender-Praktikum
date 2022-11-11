@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Response, make_response, request
 from flask import  render_template
 import random
 import datetime
@@ -6,6 +6,30 @@ from datetime import date
 
 
 app = Flask(__name__)
+
+def numberinstring(nr: int, cookie: str):
+
+        visited = cookie.split(":")
+
+        for door in visited:
+                if nr == int(door):
+                        return True
+        return False
+
+def handlecookie(resp: Response, nr: int):
+
+        cookie = request.cookies.get("Besucht")
+
+        if cookie == None:
+                resp.set_cookie("Besucht", str(nr))
+                return resp
+
+        if numberinstring(nr, cookie):
+                return resp
+
+
+        resp.set_cookie("Besucht",cookie + ":" + str(nr))
+        return resp
 
 
 
@@ -15,33 +39,38 @@ def start():
         title = "ORDIX 2022 Adventskalender"
         tuerliste  = []
         heute = date.today()
+        bild = random.randint(1,3)
 
+        cookie = request.cookies.get("Besucht")
 
         for i in range(24):
 
-                if i%2:
+                if numberinstring(i, cookie):
                         thisdict= {
                         "nr": i + 1,
-                        "farbe": "blue",
+                        "tuerclass": "tuer open",
                         "ypos": random.randint(-10,11),
                         "xpos": random.randint(-4,94),
                         }
                 else:
                         thisdict= {
                         "nr": i + 1,
-                        "farbe": "green",
+                        "tuerclass": "tuer closed",
                         "ypos": random.randint(-10,11),
                         "xpos": random.randint(-4,94)
                         }
                 random.shuffle(tuerliste)
                 tuerliste.append(thisdict)
 
-                d1 = int(heute.strftime("%d"))
-                m1 = int(heute.strftime("%m"))
+
+        d1 = int(heute.strftime("%d"))
+        m1 = int(heute.strftime("%m"))
+
         
 
+        Besucht = request.cookies.get("Besucht")
 
-        return render_template("start.html", title=title, tuerliste=tuerliste, heute=heute, d1=d1, m1=m1)
+        return render_template("start.html", title=title, tuerliste=tuerliste, heute=heute, d1=d1, m1=m1, Besucht=Besucht, bild=bild)
 
 
         
@@ -49,10 +78,6 @@ def start():
 
 @app.route("/tuer/<int:nr>")
 def tuer(nr):
-
-        heute = date.today()
-        d1 = int(heute.strftime("%d"))
-        m1 = int(heute.strftime("%m"))
 
 
         aufg1 = "aw1"
@@ -83,9 +108,17 @@ def tuer(nr):
         aufg = [aufg1,aufg2,aufg3,aufg4,aufg5,aufg6,aufg7,aufg8,aufg9,aufg10,aufg11,aufg12,
                 aufg13,aufg14,aufg15,aufg16,aufg17,aufg18,aufg19,aufg20,aufg21,aufg22,aufg23,aufg24]
 
-        if nr <= d1:
 
-                return render_template("tueren.html", nr=nr, aufg=aufg)
+
+        heute = date.today()
+        d1 = int(heute.strftime("%d"))
+        m1 = int(heute.strftime("%m"))
+
+        if nr <= d1:
+                resp = make_response(render_template("tueren.html", nr=nr, aufg=aufg))
+                # resp.set_cookie("Besucht"+ str(nr), "true")
+                resp = handlecookie(resp, nr)
+                return resp 
 
         return "Schummler"
         
