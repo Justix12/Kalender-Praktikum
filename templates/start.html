@@ -31,19 +31,24 @@
     </head>
     <body>
 
-        <h1 id="z3">Ordix Adventskalender 2022</h1> 
-
+        <h1 id="z3">ORDIX Adventskalender 2022 {{ d1 }} {{ m1 }}</h1> 
 
        <table>
         {% for row in range(4) %}
         <tr>
 
             {% for col in range(6) %}
-            <td> 
+            <td>                 
                 <div class="tuer" id="tuer{{ tuerliste[ row * 6 + col].nr }}" style="position:relative">
-                    <div style="position:absolute">
-                    <a id="z2" href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
-                    </div>
+                    {% if tuerliste[ row * 6 + col].nr <= d1 and m1 == 11 %} 
+                            <div style="position:absolute">
+                            <a id="z2" href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
+                            </div>
+                        {% else %}
+                            <div style="position:absolute">
+                            <a><p id="z2" >{{ tuerliste[ row * 6 + col].nr }}</p></a>
+                            </div>
+                    {% endif %}
                 </div>
             </td>
             {% endfor %}
