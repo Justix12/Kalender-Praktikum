@@ -1,21 +1,23 @@
 from flask import Flask, Response, make_response, request
 from flask import  render_template
 import random
-import datetime
 from datetime import date
 
 
 app = Flask(__name__)
 
 def numberinstring(nr: int, cookie: str):
+     
+      visited = ""
+      if cookie:
+          visited = cookie.split(":")
 
-        visited = cookie.split(":")
-
-        for door in visited:
+      for door in visited:
                 if nr == int(door):
-                        return True
-        return False
-
+                 return True
+     
+      return False
+       
 def handlecookie(resp: Response, nr: int):
 
         cookie = request.cookies.get("Besucht")
@@ -43,18 +45,19 @@ def start():
 
         cookie = request.cookies.get("Besucht")
 
-        for i in range(24):
+        for i in range(1, 25):
 
                 if numberinstring(i, cookie):
                         thisdict= {
-                        "nr": i + 1,
+                        "nr": i,
                         "tuerclass": "tuer open",
                         "ypos": random.randint(-10,11),
                         "xpos": random.randint(-4,94),
+                        "farbe": "black",
                         }
                 else:
                         thisdict= {
-                        "nr": i + 1,
+                        "nr": i,
                         "tuerclass": "tuer closed",
                         "ypos": random.randint(-10,11),
                         "xpos": random.randint(-4,94)
@@ -62,15 +65,13 @@ def start():
                 random.shuffle(tuerliste)
                 tuerliste.append(thisdict)
 
-
         d1 = int(heute.strftime("%d"))
         m1 = int(heute.strftime("%m"))
 
         
 
-        Besucht = request.cookies.get("Besucht")
 
-        return render_template("start.html", title=title, tuerliste=tuerliste, heute=heute, d1=d1, m1=m1, Besucht=Besucht, bild=bild)
+        return render_template("start.html", title=title, tuerliste=tuerliste, heute=heute, d1=d1, m1=m1, bild=bild)
 
 
         

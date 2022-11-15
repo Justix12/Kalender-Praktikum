@@ -1,11 +1,22 @@
 #z1 {
-
     text-decoration: none;
-
 }
 
 #z2 {
     color: white;
+}
+
+#z3 {
+    color: red;
+}
+
+#z4 {
+    color: red;
+}
+
+body {
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 @font-face {

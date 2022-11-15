@@ -26,7 +26,7 @@
     }
 
     .open {
-        background-color: grey;
+        background-image: url("../static/img/dooropen.png");
         display: flex;
         align-items: center;
         justify-content: center;
@@ -45,6 +45,7 @@
         background-repeat: no-repeat;
         z-index: 100;
     }
+
 
     
     {% if bild == 1 %}
@@ -84,9 +85,15 @@
             <td>                 
                 <div class="{{ tuerliste[row * 6 + col].tuerclass }}" id="tuer{{ tuerliste[ row * 6 + col].nr }}" style="position:relative">
                     {% if tuerliste[ row * 6 + col].nr <= d1 and m1 == 11 %} 
+                            {% if tuerliste[row * 6 + col].tuerclass == "tuer open" %}
+                            <div style="position:absolute">
+                            <a  id="z4" href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
+                            </div>
+                            {% else %}
                             <div style="position:absolute">
                             <a  id="z2" href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
                             </div>
+                            {% endif %}
                         {% else %}
                             <div style="position:absolute">
                             <a><p id="z2" >{{ tuerliste[ row * 6 + col].nr }}</p></a>
