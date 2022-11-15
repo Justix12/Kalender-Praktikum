@@ -30,9 +30,17 @@ cur.execute("CREATE TABLE if not exists tuer (id INT, content TEXT(65535) )")
 
 cur = mydb.cursor(buffered=True)
 
-gibt_es = """ SELECT * FROM advetskalender.tuer WHERE id LIKE '%20%' """
 
-if gibt_es:
+gibt_es = """ SELECT * FROM advetskalender.tuer WHERE id LIKE '%20%' """
+if gibt_es is None:
+
+        #cur.execute(""" truncate tuer """)
+        for zahl in range(1, 25):
+                aw= "hallo1"
+                valu = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
+                valu1 = (zahl, aw)
+                cur.execute(valu, valu1)
+
         mydb.commit()
       
         cur.execute("SHOW TABLES")
@@ -41,20 +49,13 @@ if gibt_es:
 
         cur.execute(see)
 
-        #cur.execute(""" truncate tuer """)
-
         print(cur.rowcount, "drinne")
         for x in cur:
          print(x)
+        print("hinzugefügt, war vorher nix")
+
         cur.close()
 else:
-        for zahl in range(1, 25):
-                aw= "hallo1"
-                valu = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
-                valu1 = (zahl, aw)
-                cur.execute(valu, valu1)
-
-                mydb.commit()
       
         cur.execute("SHOW TABLES")
 
@@ -62,38 +63,12 @@ else:
 
         cur.execute(see)
 
-        #cur.execute(""" truncate tuer """)
-
         print(cur.rowcount, "drinne")
         for x in cur:
          print(x)
+        print("ist was drinne")
+
         cur.close()
-
-
-
-# for zahl in range(1, 25):
-#         aw= "hallo1"
-#         valu = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
-#         valu1 = (zahl, aw)
-#         cur.execute(valu, valu1)
-
-
-# mydb.commit()
-      
-# cur.execute("SHOW TABLES")
-
-# see = """ SELECT * FROM adventskalender.tuer; """
-
-# cur.execute(see)
-
-# #cur.execute(""" truncate tuer """)
-
-# print(cur.rowcount, "drinne")
-# for x in cur:
-#          print(x)
-# cur.close()
-
-
 
 
 def numberinstring(nr: int, cookie: str):
@@ -220,4 +195,4 @@ def tuer(nr):
 
 
 if __name__ =="__main__":
-        app.run(debug=True)
+        app.run(debug=False)
