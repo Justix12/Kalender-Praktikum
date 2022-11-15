@@ -1,10 +1,100 @@
-from flask import Flask, Response, make_response, request
-from flask import  render_template
+from flask import Flask, render_template,Response, make_response, request
 import random
 from datetime import date
-
+import mysql.connector
 
 app = Flask(__name__)
+
+mydb = mysql.connector.connect(
+  host="127.0.0.1",
+  user="root",
+  password="8naYsFQd",
+)
+
+cur = mydb.cursor()
+
+cur.execute("CREATE DATABASE if not exists adventskalender")
+
+mydb = mysql.connector.connect(
+  host="127.0.0.1",
+  user="root",
+  password="8naYsFQd",
+  database="adventskalender"
+)
+
+cur = mydb.cursor(buffered=True)
+
+cur.execute("SHOW DATABASES")
+cur.execute("CREATE TABLE if not exists tuer (id INT, content TEXT(65535) )")
+
+
+cur = mydb.cursor(buffered=True)
+
+gibt_es = """ SELECT * FROM advetskalender.tuer WHERE id LIKE '%20%' """
+
+if gibt_es:
+        mydb.commit()
+      
+        cur.execute("SHOW TABLES")
+
+        see = """ SELECT * FROM adventskalender.tuer; """
+
+        cur.execute(see)
+
+        #cur.execute(""" truncate tuer """)
+
+        print(cur.rowcount, "drinne")
+        for x in cur:
+         print(x)
+        cur.close()
+else:
+        for zahl in range(1, 25):
+                aw= "hallo1"
+                valu = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
+                valu1 = (zahl, aw)
+                cur.execute(valu, valu1)
+
+                mydb.commit()
+      
+        cur.execute("SHOW TABLES")
+
+        see = """ SELECT * FROM adventskalender.tuer; """
+
+        cur.execute(see)
+
+        #cur.execute(""" truncate tuer """)
+
+        print(cur.rowcount, "drinne")
+        for x in cur:
+         print(x)
+        cur.close()
+
+
+
+# for zahl in range(1, 25):
+#         aw= "hallo1"
+#         valu = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
+#         valu1 = (zahl, aw)
+#         cur.execute(valu, valu1)
+
+
+# mydb.commit()
+      
+# cur.execute("SHOW TABLES")
+
+# see = """ SELECT * FROM adventskalender.tuer; """
+
+# cur.execute(see)
+
+# #cur.execute(""" truncate tuer """)
+
+# print(cur.rowcount, "drinne")
+# for x in cur:
+#          print(x)
+# cur.close()
+
+
+
 
 def numberinstring(nr: int, cookie: str):
      
@@ -37,6 +127,9 @@ def handlecookie(resp: Response, nr: int):
 
 @app.route("/")
 def start():
+
+
+
 
         title = "ORDIX 2022 Adventskalender"
         tuerliste  = []
