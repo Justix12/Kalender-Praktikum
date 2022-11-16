@@ -5,70 +5,84 @@ import mysql.connector
 
 app = Flask(__name__)
 
-mydb = mysql.connector.connect(
-  host="127.0.0.1",
-  user="root",
-  password="8naYsFQd",
-)
 
-cur = mydb.cursor()
+def init():
+        mydb = mysql.connector.connect(
+          host="127.0.0.1",
+          user="root",
+          password="8naYsFQd",
+        )
 
-cur.execute("CREATE DATABASE if not exists adventskalender")
+        cur = mydb.cursor()
 
-mydb = mysql.connector.connect(
-  host="127.0.0.1",
-  user="root",
-  password="8naYsFQd",
-  database="adventskalender"
-)
+        cur.execute("CREATE DATABASE if not exists adventskalender")
 
-cur = mydb.cursor(buffered=True)
+        mydb = mysql.connector.connect(
+          host="127.0.0.1",
+          user="root",
+          password="8naYsFQd",
+          database="adventskalender"
+        )
 
-cur.execute("SHOW DATABASES")
-cur.execute("CREATE TABLE if not exists tuer (id INT, content TEXT(65535) )")
+        cur = mydb.cursor(buffered=True)
+
+        cur.execute("SHOW DATABASES")
+        cur.execute("CREATE TABLE if not exists tuer (id INT, content TEXT(65535) )")
 
 
-cur = mydb.cursor(buffered=True)
+        cur = mydb.cursor(buffered=True)
 
 
-gibt_es = """ SELECT * FROM advetskalender.tuer WHERE id LIKE '%20%' """
-if gibt_es is None:
+        
 
-        #cur.execute(""" truncate tuer """)
-        for zahl in range(1, 25):
-                aw= "hallo1"
-                valu = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
-                valu1 = (zahl, aw)
-                cur.execute(valu, valu1)
 
-        mydb.commit()
-      
-        cur.execute("SHOW TABLES")
+        
+        rowcheck = """ SELECT * FROM adventskalender.tuer; """
 
-        see = """ SELECT * FROM adventskalender.tuer; """
+        
+        cur.execute(rowcheck)
 
-        cur.execute(see)
+        gibt_es = cur.rowcount #cur.execute("SELECT * FROM tuer WHERE id LIKE '%20%'")
+        print(gibt_es)
+        if gibt_es == 0:
 
-        print(cur.rowcount, "drinne")
-        for x in cur:
-         print(x)
-        print("hinzugefügt, war vorher nix")
+                #cur.execute(""" truncate tuer """)
+                for zahl in range(1, 25):
+                        aw= "aw"
+                        valu = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
+                        valu1 = (zahl, aw)
+                        cur.execute(valu, valu1)
 
-        cur.close()
-else:
-      
-        cur.execute("SHOW TABLES")
+                mydb.commit()
 
-        see = """ SELECT * FROM adventskalender.tuer; """
+                cur.execute("SHOW TABLES")
 
-        cur.execute(see)
+                see = ("SELECT * FROM adventskalender.tuer;")
 
-        print(cur.rowcount, "drinne")
-        for x in cur:
-         print(x)
-        print("ist was drinne")
+                cur.execute(see)
 
-        cur.close()
+                print(cur.rowcount, "drinne")
+                for x in cur:
+                 print(x)
+                print("hinzugefügt, war vorher nix")
+                print(cur.rowcount)
+
+                cur.close()
+        else:
+                #cur.execute(""" truncate tuer """)
+                
+                cur.execute("SHOW TABLES")
+
+                see = """ SELECT * FROM adventskalender.tuer; """
+
+                cur.execute(see)
+
+                print(cur.rowcount, "drinne")
+                for x in cur:
+                 print(x)
+                print("ist was drinne")
+
+                cur.close()
 
 
 def numberinstring(nr: int, cookie: str):
@@ -102,8 +116,6 @@ def handlecookie(resp: Response, nr: int):
 
 @app.route("/")
 def start():
-
-
 
 
         title = "ORDIX 2022 Adventskalender"
@@ -195,4 +207,5 @@ def tuer(nr):
 
 
 if __name__ =="__main__":
-        app.run(debug=False)
+        init()
+        app.run(debug=True)
