@@ -8,7 +8,7 @@ app = Flask(__name__)
 zaehler = 1
 
 
-def dateileser():
+def filereader():
         #for dateinr in range(1,25):
         global zaehler
         with open('./tuereninhalt/%s.txt' % zaehler , encoding='utf8') as fd:
@@ -60,7 +60,7 @@ def init():
                 for zahl in range(1, 25):
                         #aw= dateileser()
                         valu = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
-                        valu1 = (zahl, dateileser())
+                        valu1 = (zahl, filereader())
                         cur.execute(valu, valu1)
 
                 mydb.commit()
@@ -77,7 +77,7 @@ def init():
                 print("hinzugefügt, war vorher nix")
                 print(cur.rowcount)
 
-                cur.close()
+                #cur.close()
 
 
                 
@@ -95,9 +95,9 @@ def init():
                  print(x)
                 print("ist was drinne")
 
-                cur.close()
 
-              
+                #cur.close()
+       
 
 
 def numberinstring(nr: int, cookie: str):
@@ -176,42 +176,30 @@ def start():
 def tuer(nr):
 
 
-        aufg1 = "aw1"
-        aufg2 = "aw2"
-        aufg3 = "aw3"
-        aufg4 = "aw4"
-        aufg5 = "aw5"
-        aufg6 = "aw6"
-        aufg7 = "aw7"
-        aufg8 = "aw8"
-        aufg9 = "aw9"
-        aufg10 = "aw10"
-        aufg11 = "aw11" 
-        aufg12 = "aw12"
-        aufg13 = "aw13"
-        aufg14 = "aw14"
-        aufg15 = "aw15"
-        aufg16 = "aw16"
-        aufg17 = "aw17"
-        aufg18 = "aw18"
-        aufg19 = "aw19"
-        aufg20 = "aw20"
-        aufg21 = "aw21"
-        aufg22 = "aw22"
-        aufg23 = "aw23"
-        aufg24 = "aw24"
+        mydb = mysql.connector.connect(
+          host="127.0.0.1",
+          user="root",
+          password="8naYsFQd",
+          database="adventskalender"
+        )
 
+        cur = mydb.cursor(buffered=True)
+
+
+        cur.execute("SHOW TABLES")
         
-        aufgnr = """  SELECT * FROM adventskalender.tuer WHERE id = %d;""" % (nr)                  #[aufg1,aufg2,aufg3,aufg4,aufg5,aufg6,aufg7,aufg8,aufg9,aufg10,aufg11,aufg12, aufg13,aufg14,aufg15,aufg16,aufg17,aufg18,aufg19,aufg20,aufg21,aufg22,aufg23,aufg24]
 
-
+        aufgnr = (f"SELECT content FROM tuer WHERE id = {nr};")
+        cur.execute( aufgnr) 
+        for x in cur:
+                print(x)
 
         heute = date.today()
         d1 = int(heute.strftime("%d"))
         m1 = int(heute.strftime("%m"))
 
         if nr <= d1:
-                resp = make_response(render_template("tueren.html", nr=nr, aufgnr=aufgnr))
+                resp = make_response(render_template("tueren.html", nr=nr, x=x[0] ))
                 resp = handlecookie(resp, nr)
                 return resp 
 
@@ -222,5 +210,4 @@ def tuer(nr):
 
 if __name__ =="__main__":
         init()
-        # dateileser()
         app.run(debug=True)
