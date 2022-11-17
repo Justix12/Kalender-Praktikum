@@ -5,6 +5,21 @@ import mysql.connector
 
 app = Flask(__name__)
 
+zaehler = 1
+
+
+def dateileser():
+        #for dateinr in range(1,25):
+        global zaehler
+        with open('./tuereninhalt/%s.txt' % zaehler , encoding='utf8') as fd:
+                        zaehler += 1 
+                        for line in fd:
+                                line.strip()
+                                #print(zaehler)
+                                return line
+                          
+
+
 
 def init():
         mydb = mysql.connector.connect(
@@ -32,25 +47,20 @@ def init():
 
         cur = mydb.cursor(buffered=True)
 
-
-        
-
-
         
         rowcheck = """ SELECT * FROM adventskalender.tuer; """
-
         
         cur.execute(rowcheck)
 
-        gibt_es = cur.rowcount #cur.execute("SELECT * FROM tuer WHERE id LIKE '%20%'")
+        gibt_es = cur.rowcount 
         print(gibt_es)
         if gibt_es == 0:
 
                 #cur.execute(""" truncate tuer """)
                 for zahl in range(1, 25):
-                        aw= "aw"
+                        #aw= dateileser()
                         valu = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
-                        valu1 = (zahl, aw)
+                        valu1 = (zahl, dateileser())
                         cur.execute(valu, valu1)
 
                 mydb.commit()
@@ -68,6 +78,9 @@ def init():
                 print(cur.rowcount)
 
                 cur.close()
+
+
+                
         else:
                 #cur.execute(""" truncate tuer """)
                 
@@ -83,6 +96,12 @@ def init():
                 print("ist was drinne")
 
                 cur.close()
+
+
+        cur = mydb.cursor(buffered=True)
+        aufg_finder = cur.execute(" SELECT * FROM adventskalender.tuer WHERE id = %d; ")
+        return(aufg_finder)
+              
 
 
 def numberinstring(nr: int, cookie: str):
@@ -186,8 +205,8 @@ def tuer(nr):
         aufg23 = "aw23"
         aufg24 = "aw24"
 
-        aufg = [aufg1,aufg2,aufg3,aufg4,aufg5,aufg6,aufg7,aufg8,aufg9,aufg10,aufg11,aufg12,
-                aufg13,aufg14,aufg15,aufg16,aufg17,aufg18,aufg19,aufg20,aufg21,aufg22,aufg23,aufg24]
+        
+        aufgnr = """  SELECT * FROM adventskalender.tuer WHERE id = %d;""" % (nr)                  #[aufg1,aufg2,aufg3,aufg4,aufg5,aufg6,aufg7,aufg8,aufg9,aufg10,aufg11,aufg12, aufg13,aufg14,aufg15,aufg16,aufg17,aufg18,aufg19,aufg20,aufg21,aufg22,aufg23,aufg24]
 
 
 
@@ -196,8 +215,7 @@ def tuer(nr):
         m1 = int(heute.strftime("%m"))
 
         if nr <= d1:
-                resp = make_response(render_template("tueren.html", nr=nr, aufg=aufg))
-                # resp.set_cookie("Besucht"+ str(nr), "true")
+                resp = make_response(render_template("tueren.html", nr=nr, aufgnr=aufgnr))
                 resp = handlecookie(resp, nr)
                 return resp 
 
@@ -208,4 +226,5 @@ def tuer(nr):
 
 if __name__ =="__main__":
         init()
+        # dateileser()
         app.run(debug=True)
