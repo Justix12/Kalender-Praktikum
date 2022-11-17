@@ -97,10 +97,6 @@ def init():
 
                 cur.close()
 
-
-        cur = mydb.cursor(buffered=True)
-        aufg_finder = cur.execute(" SELECT * FROM adventskalender.tuer WHERE id = %d; ")
-        return(aufg_finder)
               
 
 
