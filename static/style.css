@@ -1,5 +1,23 @@
+
+code {
+    background-color: grey;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#y1 {
+    color:white;
+    font-family: Candycane;
+    font-size: 29px;
+    margin-left: 80px;
+
+}
+
 #z1 {
     text-decoration: none;
+    display:inline-block;
+    font-family: Candycane;
+    color: white;
 }
 
 #z2 {
@@ -29,7 +47,7 @@ body {
     src: url(../static/Christmas.ttf);
 }
 
-.tuer {
+.door {
     font-family: "Candycane";
     font-size: 65px;
     width: 100px;
@@ -53,3 +71,35 @@ a:visited{
     text-align: center;
     font-family: "Christmas";
 }
+
+.door {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: 100px;
+    background-repeat: no-repeat;
+    position: relative;
+
+}
+
+.open {
+    background-image: url("../static/img/dooropen.png");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: 100px;
+    background-repeat: no-repeat;
+    z-index: 100;
+
+}
+
+.closed {
+    background-image: url("../static/img/door.png");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: 100px;
+    background-repeat: no-repeat;
+    z-index: 100;
+}
+

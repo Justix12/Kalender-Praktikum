@@ -5,104 +5,44 @@
         <title>{{ title }}</title>
 
         <style>
+            
 
-    {% for tueren in tuerliste %}
-
-    #tuer{{ tueren.nr }} {
-        bottom: {{ tueren.ypos }}px;
-        left: {{ tueren.xpos }}px;
-
-    }
-
-    {% endfor %}
-
-    .tuer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-size: 100px;
-        background-repeat: no-repeat;
-
-    }
-
-    .open {
-        background-image: url("../static/img/dooropen.png");
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-size: 100px;
-        background-repeat: no-repeat;
-        z-index: 100;
-
-    }
-
-    .closed {
-        background-image: url("../static/img/door.png");
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-size: 100px;
-        background-repeat: no-repeat;
-        z-index: 100;
-    }
-
-
-    
-    {% if bild == 1 %}
-
-    body {
-        background-image: url("../static/img/christmaswall.png")
-    }
-
-     {% elif bild == 2 %}
-
-    body {
-        background-image: url("../static/img/winter.png")
-    }
-
-
-    {% else %}
-
-    body {
-        background-image: url("../static/img/snow.png")
-    }
-
-    {% endif %}
 
         </style>
 
-
     </head>
-    <body>
+    <body style="background-image: url( {{ bild }} )" >
 
+        
         <h1 id="z3">ORDIX Adventskalender {{ d1 }}.{{ m1 }}.2022</h1> 
 
        <table>
-        {% for row in range(4) %}
-        <tr>
-
-            {% for col in range(6) %}
+        {% for door in tuerliste  %}
+            {% if door["id"] % 6 == 0 %}
+                <tr>
+            {% endif %}
             <td>                 
-                <div class="{{ tuerliste[row * 6 + col].tuerclass }}" id="tuer{{ tuerliste[ row * 6 + col].nr }}" style="position:relative">
-                    {% if tuerliste[ row * 6 + col].nr <= d1 and m1 == 11 %} 
-                            {% if tuerliste[row * 6 + col].tuerclass == "tuer open" %}
+                <div class="{{ door.doorClass }}"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }} " >
+                    {% if door.nr <= d1 and m1 == 11 %} 
+                            {% if door.doorClass == "door open" %}
                             <div style="position:absolute">
-                            <a  id="z4" href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
+                            <a  id="z4" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
                             </div>
                             {% else %}
                             <div style="position:absolute">
-                            <a  id="z2" href="./tuer/{{ tuerliste[ row * 6 + col].nr }}">{{ tuerliste[ row * 6 + col].nr }}</a>
+                            <a  id="z2" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
                             </div>
                             {% endif %}
                         {% else %}
                             <div style="position:absolute">
-                            <a><p id="z2" >{{ tuerliste[ row * 6 + col].nr }}</p></a>
+                            <a><p id="z2" >{{ door.nr }}</p></a>
                             </div>
                     {% endif %}
                 </div>
             </td>
-            {% endfor %}
-        </tr>
+            {% if door["id"] % 6 == 5 %}
+                </tr>
+            {% endif %}
         {% endfor %}
        </table>
 
