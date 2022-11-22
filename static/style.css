@@ -16,7 +16,7 @@ code {
 #z1 {
     text-decoration: none;
     display:inline-block;
-    font-family: Candycane;
+    font-family: Candycane !important;
     color: white;
 }
 
