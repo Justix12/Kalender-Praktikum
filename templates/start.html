@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="../static/style.css">
+        <link rel="stylesheet" href="../static/css/style.css">
         <title>{{ title }}</title>
 
         <style>
@@ -21,19 +21,36 @@
             {% if door["id"] % 6 == 0 %}
                 <tr>
             {% endif %}
-            <td>                 
-                <div class="{{ door.doorClass }}"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }} " >
+            <td>    
+                {% if door.nr == 4 or door.nr == 11 or door.nr == 18 %}      
+                <div class="door advent"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
+
+                {% elif door.nr == 24 and door.doorClass == "door open" %}
+                <div class="door lastopen"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
+                    
+                {% elif door.nr == 24 and door.doorClass == "door closed"%}
+                <div class="door lastclosed"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
+
+                {% else %}
+                <div class="{{ door.doorClass }}"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
+                {% endif %}
                     {% if door.nr <= d1 and m1 == 11 %} 
                             {% if door.doorClass == "door open" %}
-                            <div style="position:absolute">
-                            <a  id="z4" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
-                            </div>
+                                     <div style="position:absolute">
+                                     <a id="z4"  href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
+                                     </div>
                             {% else %}
-                            <div style="position:absolute">
-                            <a  id="z2" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
-                            </div>
+                                    {% if door.nr == 4 or door.nr == 11 or door.nr == 18 %}
+                                    <div style="position:absolute">
+                                    <a  class="aadvent" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
+                                    </div>
+                                    {% else %}
+                                    <div style="position:absolute">
+                                    <a id="z2" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
+                                    </div>
+                                    {% endif %}
                             {% endif %}
-                        {% else %}
+                    {% else %}
                             <div style="position:absolute">
                             <a><p id="z2" >{{ door.nr }}</p></a>
                             </div>

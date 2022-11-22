@@ -2,7 +2,7 @@ import mysql.connector
 import markdown
 
 
-def fileReader(counter):
+def taskReader(counter):
     """
     reads .txt file
     @return all lines in a .txt file
@@ -11,6 +11,15 @@ def fileReader(counter):
     lines = []
 
     with open('./doorContent/%s.txt' % counter, encoding='utf8') as f:
+        for line in f:
+            lines.append(line.strip())
+        return markdown.markdown(str('\n'.join(lines)))
+
+def answerReader(counter):
+
+    lines = []
+
+    with open('./doorAnswers/%sa.txt' % counter, encoding='utf8') as f:
         for line in f:
             lines.append(line.strip())
         return markdown.markdown(str('\n'.join(lines)))
@@ -44,8 +53,8 @@ def addDataToDB():
         mydb, cur = connectToDB()
 
         for i in range(1, 25):
-            statement = ("INSERT INTO  tuer (id, content) VALUES (%s, %s)")
-            valu1 = (i, fileReader(i))
+            statement = ("INSERT INTO  tuer (id, content, answer) VALUES (%s, %s, %s)")
+            valu1 = (i, taskReader(i), answerReader(i))
             cur.execute(statement, valu1)
 
         mydb.commit()
@@ -82,7 +91,8 @@ def init(dbupdate: bool):
     _, cur = connectToDB(init = True)
 
 
-    cur.execute("CREATE TABLE if not exists tuer (id INT, content TEXT(65535) )")
+    #cur.execute("DROP TABLE if exists tuer")
+    cur.execute("CREATE TABLE if not exists tuer (id INT, content TEXT(65535), answer TEXT(65535) )")
     cur.execute("SELECT * FROM adventskalender.tuer;")
     if cur.rowcount == 0:
 
@@ -110,7 +120,7 @@ def init(dbupdate: bool):
 def getTask(nr):
     """
     gets task from databas
-    @param nr id to looks for in table tuer
+    @param nr looks for id in table tuer
     @return fetches all in database 
     """
 
@@ -118,6 +128,22 @@ def getTask(nr):
 
     cur.execute("SHOW TABLES")
 
-    aufgnr = (f"SELECT content FROM tuer WHERE id = {nr};")
-    cur.execute(aufgnr)
+    tasNr = (f"SELECT content FROM tuer WHERE id = {nr};")
+    cur.execute(tasNr)
     return cur.fetchall()[0]
+
+def getAnswer(nr):
+    """
+    gets Answer from database
+    @param nr looks for id in table tuer
+    @return fetches all in database 
+    """
+
+    mydb, cur = connectToDB()
+
+    cur.execute("SHOW TABLES")
+
+    ansNr = (f"SELECT answer FROM tuer WHERE id = {nr};")
+    cur.execute(ansNr)
+    return cur.fetchall()[0]
+

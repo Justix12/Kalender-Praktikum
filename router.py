@@ -43,6 +43,7 @@ def start():
                 "yPos": random.randint(-10, 11),
                 "xPos": random.randint(-4, 94),
                 "id":0
+            
             }
         else:
             door = {
@@ -57,6 +58,7 @@ def start():
     for i in range(0,24):
         door = doorlist[i]
         door["id"] = i
+
 
 
     day, month = getDate()
@@ -86,17 +88,19 @@ def tuer(nr):
 
     return "Schummlder"
 
-@app.route("/tuer/loesungen/<int:nr>")
+@app.route("/loesungen/<int:nr>")
 def loesung(nr):
 
     title = "ORDIX 2022 Adventskalender"
+
+    x = dbc.getAnswer(nr)
 
     m1 = getDate()[1]
     d1 = getDate()[0]
     
 
     if nr <= d1 - 1:
-        return render_template("loesungen.html", nr=nr, m1=m1, d1=d1, title=title)
+        return render_template("loesungen.html", nr=nr, m1=m1, d1=d1, title=title, x=x[0], )
 
     return "schummler"
     

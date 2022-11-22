@@ -2,22 +2,25 @@
 <html>
     <head>
 
-        <link rel="stylesheet" href="../static/style.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
         <title>{{ title }}</title>
 
     </head>
     <body style="background-image: url(../static/img/red.jpg);">
 
         
-       <a id="z1" href="../{{ nr }}"><.zurueck</a> 
-       <h1 style="margin-left: 5px" id= "z1">Adventskalender 2022  Tuer Nr.{{ nr }}</h1>
-       <p id="z1" style="margin-left: 540px" >  {{ d1 }}.{{ m1 }}.2022</p>
+       <a id="z1" href="../tuer/{{ nr }}"><.zurueck</a> 
+       <h1 style="margin-left: 5px" id= "z1">Adventskalender 2022  Loesung Nr<span class="arial">.</span>{{ nr }}</h1>
+       <p id="z1" style="margin-left: 500px" >  {{ d1 }}<span class="arial">.</span>{{ m1 }}<span class="arial">.</span>2022</p>
     
        
-
         <h2 id="y1" >Deine Aufgabe Lautet:</h2>
 
-
+        <div id="y1" >
+            {% autoescape false %}
+                {{ x }}
+            {% endautoescape %}    
+        </div>
      
 
     </body>
