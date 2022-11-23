@@ -28,6 +28,7 @@ def start():
     creates dictionary doorlist, requests cookies, generates backround URL,
     @return renders start.html, returns variables
     """
+    
     title = "ORDIX 2022 Adventskalender"
     doorlist = []
     backroundlist = ("../static/img/snow.png", "../static/img/winter.png", "../static/img/christmaswall.png")
@@ -90,6 +91,13 @@ def tuer(nr):
 
 @app.route("/loesungen/<int:nr>")
 def loesung(nr):
+
+    """
+    renders loesungen.html corresponding to the door with number that was clicked
+    checks for current Date - 1 
+    @param nr door that was clicked
+    @return schummler if nr is greater than current date - 1
+    """
 
     title = "ORDIX 2022 Adventskalender"
 

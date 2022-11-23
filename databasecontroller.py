@@ -135,7 +135,7 @@ def getTask(nr):
 def getAnswer(nr):
     """
     gets Answer from database
-    @param nr looks for id in table tuer
+    @param nr looks for answer in table tuer
     @return fetches all in database 
     """
 

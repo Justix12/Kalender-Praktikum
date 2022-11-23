@@ -1,27 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
 
-        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-        <title>{{ title }}</title>
+<head>
 
-    </head>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <title>{{ title }}</title>
+
+</head>
+
+
+{% if nr == 4 or nr == 11 or nr == 18 %}
+
+<body style="background-image: url(../static/img/green.webp);">
+    {% else %}
+
     <body style="background-image: url(../static/img/red.jpg);">
+        {% endif %}
 
-        
-       <a id="z1" href="../tuer/{{ nr }}"><.zurueck</a> 
-       <h1 style="margin-left: 5px" id= "z1">Adventskalender 2022  Loesung Nr<span class="arial">.</span>{{ nr }}</h1>
-       <p id="z1" style="margin-left: 500px" >  {{ d1 }}<span class="arial">.</span>{{ m1 }}<span class="arial">.</span>2022</p>
-    
-       
-        <h2 id="y1" >Deine Aufgabe Lautet:</h2>
 
-        <div id="y1" >
-            {% autoescape false %}
-                {{ x }}
-            {% endautoescape %}    
-        </div>
-     
+
+        <a id="z1" href="../tuer/{{ nr }}"><.zurueck</a>
+                {% if nr == 4 %}
+                <h1 style="margin-left: 5px" id="z1">Adventskalender 2022 Loesung Nr<span class="arial">.</span>{{ nr }} -- 2<span class="arial">.</span> Advent </h1>
+                {% elif nr == 11 %}
+                <h1 style="margin-left: 5px" id="z1">Adventskalender 2022 Loesung Nr<span class="arial">.</span>{{ nr }} -- 3<span class="arial">.</span> Advent </h1>
+                {% elif nr == 18 %}
+                <h1 style="margin-left: 5px" id="z1">Adventskalender 2022 Loesung Nr<span class="arial">.</span>{{ nr }} -- 4<span class="arial">.</span> Advent </h1>
+                {% else %}
+                <h1 style="margin-left: 5px" id="z1">Adventskalender 2022 Loesung Nr<span class="arial">.</span>{{ nr }} -- - ------ </h1>
+                </h1>
+                {% endif %}
+                <p id="z1" style="margin-left: 270px"> {{ d1 }}<span class="arial">.</span>{{ m1 }}<span
+                        class="arial">.</span>2022</p>
+
+
+                <h2 id="y1">Deine Aufgabe Lautet:</h2>
+
+                <div id="y1">
+                    {% autoescape false %}
+                    {{ x }}
+                    {% endautoescape %}
+                </div>
+
 
     </body>
+
 </html>

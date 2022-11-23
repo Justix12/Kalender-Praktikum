@@ -1,72 +1,84 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="../static/css/style.css">
-        <title>{{ title }}</title>
 
-        <style>
-            
+<head>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>{{ title }}</title>
+
+    <style>
 
 
-        </style>
 
-    </head>
-    <body style="background-image: url( {{ bild }} )" >
+    </style>
 
-        
-        <h1 id="z3">ORDIX Adventskalender {{ d1 }}.{{ m1 }}.2022</h1> 
+</head>
 
-       <table>
-        {% for door in tuerliste  %}
-            {% if door["id"] % 6 == 0 %}
-                <tr>
+<body style="background-image: url( {{ bild }} )">
+
+
+    <div class="snowflakes" aria-hidden="true">
+        {% for i in range(40) %}
+        <div class="snowflake">❅</div>
+        {% endfor %}
+    </div>
+
+
+    <h1 id="z3">ORDIX Adventskalender {{ d1 }}.{{ m1 }}.2022</h1>
+
+    <table>
+        {% for door in tuerliste %}
+        {% if door["id"] % 6 == 0 %}
+        <tr>
             {% endif %}
-            <td>    
-                {% if door.nr == 4 or door.nr == 11 or door.nr == 18 %}      
-                <div class="door advent"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
+            <td>
+                {% if door.nr == 4 or door.nr == 11 or door.nr == 18 %}
+                <div class="door advent" style="left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
 
-                {% elif door.nr == 24 and door.doorClass == "door open" %}
-                <div class="door lastopen"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
-                    
-                {% elif door.nr == 24 and door.doorClass == "door closed"%}
-                <div class="door lastclosed"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
+                    {% elif door.nr == 24 and door.doorClass == "door open" %}
+                    <div class="door lastopen" style="left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
 
-                {% else %}
-                <div class="{{ door.doorClass }}"  style = "left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
-                {% endif %}
-                    {% if door.nr <= d1 and m1 == 11 %} 
-                            {% if door.doorClass == "door open" %}
-                                     <div style="position:absolute">
-                                     <a id="z4"  href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
-                                     </div>
+                        {% elif door.nr == 24 and door.doorClass == "door closed"%}
+                        <div class="door lastclosed" style="left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
+
                             {% else %}
-                                    {% if door.nr == 4 or door.nr == 11 or door.nr == 18 %}
-                                    <div style="position:absolute">
-                                    <a  class="aadvent" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
-                                    </div>
-                                    {% else %}
-                                    <div style="position:absolute">
-                                    <a id="z2" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
-                                    </div>
-                                    {% endif %}
-                            {% endif %}
-                    {% else %}
-                            <div style="position:absolute">
-                            <a><p id="z2" >{{ door.nr }}</p></a>
+                            <div class="{{ door.doorClass }}"
+                                style="left: {{ door.xPos }}px; bottom: {{ door.yPos }}px">
+                                {% endif %}
+                                {% if door.nr <= d1 and m1==11 %} {% if door.doorClass=="door open" %} <div
+                                    style="position:absolute">
+                                    <a id="z4" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
                             </div>
-                    {% endif %}
-                </div>
+                            {% else %}
+                            {% if door.nr == 4 or door.nr == 11 or door.nr == 18 %}
+                            <div style="position:absolute">
+                                <a class="aadvent" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
+                            </div>
+                            {% else %}
+                            <div style="position:absolute">
+                                <a id="z2" href="./tuer/{{ door.nr }}">{{ door.nr }}</a>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                            {% else %}
+                            <div style="position:absolute">
+                                <a>
+                                    <p id="z2">{{ door.nr }}</p>
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
             </td>
             {% if door["id"] % 6 == 5 %}
-                </tr>
-            {% endif %}
+        </tr>
+        {% endif %}
         {% endfor %}
-       </table>
+    </table>
 
 
 
-   
-        
 
-    </body>
+
+
+</body>
+
 </html>
