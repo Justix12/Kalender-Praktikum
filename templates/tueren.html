@@ -4,17 +4,18 @@
 <head>
 
     <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/lights.css">
     <title>{{ title }}</title>
 
 </head>
 
-{% if nr == 4 or nr == 11 or nr == 18 %}
+    {% if nr == 4 or nr == 11 or nr == 18 %}
 
-<body style="background-image: url(../static/img/green.webp);">
+        <body style="background-image: url(../static/img/green.webp);">
     {% else %}
 
-    <body style="background-image: url(../static/img/red.jpg);">
-        {% endif %}
+        <body style="background-image: url(../static/img/red.jpg);">
+    {% endif %}
 
 
         <a id="z1" href="{{ url_for('start') }}"><.zurueck</a>
@@ -39,10 +40,19 @@
                     {% endautoescape %}
                 </div>
 
-                <div class="logoContainer">
-                    <a href="../loesungen/{{ nr }}"><img src="../static/img/answer.png" width="160px"></a>
-                    <div class="logoCentered"><a id="z2" href="../loesungen/{{ nr }}">Loesung</a></div>
-                </div>
+
+                    <div class="logoContainer">
+                        <a href="../loesungen/{{ nr }}"><img src="../static/img/answer.png" width="160px"></a>
+                        <div class="logoCentered"><a id="z2" href="../loesungen/{{ nr }}">Loesung</a></div>
+                    </div>
+     
+
+
+                {% if nr == 24 %}
+                    <div class="tree">
+                        <img src="../static/img/tree.png" alt="tree" width="180px">
+                    </div>
+                {% endif %}
 
     </body>
 

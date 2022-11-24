@@ -8,7 +8,7 @@ python main.py
 ```
 im terminal.
 
-![alt text](skriptaufruf.gif)
+![alt text](./static/img/skriptaufruf.gif)
 
 # Module
 
@@ -51,9 +51,9 @@ im terminal.
 
 # Screenshots
 
-![alt text](start.PNG)
-![alt text](tuer.PNG)
-![alt text](loesung.PNG)
+![alt text](./static/img/start.PNG)
+![alt text](./static/img/tuer.PNG)
+![alt text](./static/img/loesung.PNG)
 
 
 

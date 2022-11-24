@@ -10,11 +10,21 @@ code {
     font-family: Arial;
 }
 
+.tree {
+    position: absolute;
+    left: 1100px; 
+    top: 420px;
+}
+.git {
+    position: absolute;
+    left: 0px; 
+    bottom: 0px;
+}
 
 
 .logoContainer {
     position: absolute;
-    left: 800px; 
+    left: 860px; 
     top: 100px;
     text-align: center;
     font-size: 35px;

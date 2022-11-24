@@ -107,7 +107,7 @@ def loesung(nr):
     d1 = getDate()[0]
     
 
-    if nr <= d1 - 1:
+    if nr <= d1:
         return render_template("loesungen.html", nr=nr, m1=m1, d1=d1, title=title, x=x[0], )
 
     return "schummler"

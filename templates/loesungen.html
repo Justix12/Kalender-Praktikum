@@ -4,19 +4,19 @@
 <head>
 
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/lights.css">
     <title>{{ title }}</title>
 
 </head>
 
 
-{% if nr == 4 or nr == 11 or nr == 18 %}
+    {% if nr == 4 or nr == 11 or nr == 18 %}
 
-<body style="background-image: url(../static/img/green.webp);">
+        <body style="background-image: url(../static/img/green.webp);">
+
     {% else %}
-
-    <body style="background-image: url(../static/img/red.jpg);">
-        {% endif %}
-
+        <body style="background-image: url(../static/img/red.jpg);">
+    {% endif %}
 
 
         <a id="z1" href="../tuer/{{ nr }}"><.zurueck</a>
@@ -42,6 +42,12 @@
                     {% endautoescape %}
                 </div>
 
+                
+                {% if nr == 24 %}
+                    <div class="tree">
+                        <img src="../static/img/tree.png" alt="tree" width="180px">
+                    </div>
+                {% endif %}
 
     </body>
 
