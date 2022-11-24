@@ -49,6 +49,11 @@ im terminal.
 </table>
 </body>
 
+# Screenshots
+
+![alt text](start.PNG)
+![alt text](tuer.PNG)
+![alt text](loesung.PNG)
 
 
 
