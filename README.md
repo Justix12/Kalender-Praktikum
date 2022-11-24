@@ -1,6 +1,16 @@
 # Allgemeines
 Im Rahmen meines Drewöchigen Schülerpraktikums bei der ORDIX AG hatte ich die Aufgabe einen Adventskalender mittels Python und dem Flask Framework zu erstellen. 
 
+# Features
+
+- Türen nur öffenbar wenn das Entsprechende Datum erreicht ist.
+
+- Schneeflockenamnimation auf der Startseite
+
+- Adventstage 2022 und die 24. Tür Personalisiert
+
+
+
 # Skritpaufruf
 Um die Website im Localhost zu starten reicht ein 
 ```

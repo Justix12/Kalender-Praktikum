@@ -6,6 +6,8 @@ code {
 }
 
 
+
+
 .arial {
     font-family: Arial;
 }
@@ -37,6 +39,13 @@ code {
     left: 45%;
     transform: translate(-50%, -50%);
 }
+
+.candle {
+    position: absolute;
+    left: 930px; 
+    top: 20px;
+}
+
 
 #y1 {
     color:white;
