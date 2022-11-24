@@ -22,13 +22,28 @@
         <a id="z1" href="../tuer/{{ nr }}"><.zurueck</a>
                 {% if nr == 4 %}
                 <h1 style="margin-left: 5px" id="z1">Adventskalender 2022 Loesung Nr<span class="arial">.</span>{{ nr }} -- 2<span class="arial">.</span> Advent </h1>
+                <div class="candle">
+                    {% for candle in range(2) %}
+                    <img src="../static/img/candle.png" width="50px" >
+                    {% endfor %}
+                </div>
                 {% elif nr == 11 %}
                 <h1 style="margin-left: 5px" id="z1">Adventskalender 2022 Loesung Nr<span class="arial">.</span>{{ nr }} -- 3<span class="arial">.</span> Advent </h1>
+                <div class="candle">
+                    {% for candle in range(3) %}
+                    <img src="../static/img/candle.png" width="50px" >
+                    {% endfor %}
+                </div>
                 {% elif nr == 18 %}
                 <h1 style="margin-left: 5px" id="z1">Adventskalender 2022 Loesung Nr<span class="arial">.</span>{{ nr }} -- 4<span class="arial">.</span> Advent </h1>
+                <div class="candle">
+                    {% for candle in range(4) %}
+                    <img src="../static/img/candle.png" width="50px" >
+                    {% endfor %}
+                </div>
                 {% else %}
                 <h1 style="margin-left: 5px" id="z1">Adventskalender 2022 Loesung Nr<span class="arial">.</span>{{ nr }} -- - ------ </h1>
-                </h1>
+
                 {% endif %}
                 <p id="z1" style="margin-left: 270px"> {{ d1 }}<span class="arial">.</span>{{ m1 }}<span
                         class="arial">.</span>2022</p>
