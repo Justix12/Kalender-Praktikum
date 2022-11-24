@@ -28,7 +28,7 @@ im terminal.
     <tr>
       <td>Router</td>
       <td>Beinhaltet Webpage URL's</td>
-      <td>Rendert die HTML Dateien und gibt Variablen weiter <td>
+      <td>Rendert die HTML Dateien und gibt Variablen weiter.<td>
     </tr>
     <tr>
       <td>Databasecontroller</td>
@@ -43,7 +43,7 @@ im terminal.
     <tr>
       <td>Main</td>
       <td>Startet Flask</td>
-      <td>Startet die Website und initialisiert die Datenbank</td>   
+      <td>Startet die Website und initialisiert die Datenbank.</td>   
     </tr>
   </tbody>
 </table>
