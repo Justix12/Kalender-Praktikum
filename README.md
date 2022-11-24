@@ -13,17 +13,7 @@ im terminal.
 # Module
 
 
-<head>
-<style>
-table.Table td {
-  border-width: 1px;
-  border-color: #000000;
-  border-style: solid;
-  padding: 3px;
-}
 
-</style>
-</head>
 
 <body>
 <table class="Table">
