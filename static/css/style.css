@@ -40,6 +40,12 @@ code {
     transform: translate(-50%, -50%);
 }
 
+.dateContainer {
+    position: absolute;
+    left: 1150px;
+    top: 6px;
+}
+
 .candle {
     position: absolute;
     left: 930px; 
