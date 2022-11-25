@@ -5,7 +5,7 @@ import markdown
 def taskReader(counter):
     """
     reads .txt file
-    @return all lines in a .txt file
+    @return all lines in a .txt file and joins the lines with a newline 
     """
 
     lines = []
@@ -16,6 +16,10 @@ def taskReader(counter):
         return markdown.markdown(str('\n'.join(lines)))
 
 def answerReader(counter):
+    """
+    reads .txt file
+    @return alls lines in a .txt file and joins the lines with a newline 
+    """
 
     lines = []
 
@@ -25,6 +29,12 @@ def answerReader(counter):
         return markdown.markdown(str('\n'.join(lines)))
 
 def connectToDB(init = False):
+    """
+    Connects to Database
+    @return cursor and db connection
+    """
+
+
     host="127.0.0.1"
     user="root"
     password="8naYsFQd"
@@ -49,6 +59,10 @@ def connectToDB(init = False):
 
 
 def addDataToDB():
+        """
+        Inserts Data into table
+
+        """
 
         mydb, cur = connectToDB()
 
@@ -59,26 +73,16 @@ def addDataToDB():
 
         mydb.commit()
 
-        # cur.execute("SHOW TABLES")
-
-        # see = ("SELECT * FROM adventskalender.tuer;")
-
-        # cur.execute(see)
-
-        # print(cur.rowcount, "drinne")
-        # for x in cur:
-        #     print(x)
         print("hinzugefügt, war vorher nix")
-        # print(cur.rowcount)
 
-        # cur.close()
 
 def deleteDataFromDB():
+    """
+    Deletes Data from table tuer
+    """
 
     mydb, cur = connectToDB()
     cur.execute(" DELETE FROM tuer;")
-    #cur.execute("SELECT * FROM tuer ")
-    #print(cur.rowcount)
     mydb.commit()
 
 
@@ -86,6 +90,7 @@ def deleteDataFromDB():
 def init(dbupdate: bool):
     """
     initialises the database and creates databases/tables if not existant
+    @param dbupdate updates Databse if true
 
     """
     _, cur = connectToDB(init = True)
